@@ -1,6 +1,6 @@
 # Fusion Check-In
 
-Admin web app for the **University of Windsor's Fusion Innovation & Entrepreneurship Network** —
+Admin web app for the **University of Windsor's Fusion Innovation & Entrepreneurship Network** 
 manage students, run events, and check people in by QR code from a kiosk or a staff member's
 phone, with live attendance tracking as it happens.
 
