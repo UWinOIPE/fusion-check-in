@@ -1,0 +1,10 @@
+stateDiagram-v2
+  state "Early" as Early
+  state "On time" as OnTime
+  state "Late" as Late
+  [*] --> Early : scanned before event start
+  [*] --> OnTime : scanned within the grace period
+  [*] --> Late : scanned after the grace period
+  Early --> [*] : status is final, never recomputed later
+  OnTime --> [*] : status is final, never recomputed later
+  Late --> [*] : status is final, never recomputed later

@@ -1,0 +1,18 @@
+sequenceDiagram
+  actor Staff
+  participant App as Live Monitor (React app)
+  participant DB as Supabase (Postgres)
+
+  Staff->>App: Search student by name or number
+  App->>DB: select from students
+  DB-->>App: matching student
+  Staff->>App: Click Check in manually
+  App->>DB: record_check_in(method = manual)
+  DB->>DB: Skip window check, compute status, insert row
+  DB-->>App: outcome, checked_in_at, status
+  App-->>Staff: Show success and an Undo link
+  Staff->>App: Click Undo
+  App->>DB: undo_check_in(check_in_id)
+  DB->>DB: Delete the check_ins row
+  DB-->>App: success
+  App-->>Staff: Check-in removed

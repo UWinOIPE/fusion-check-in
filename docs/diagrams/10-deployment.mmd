@@ -1,0 +1,19 @@
+flowchart LR
+  subgraph Devices["User Devices"]
+    D1["Admin laptop or desktop"]
+    D2["Staff phone"]
+    D3["Kiosk tablet"]
+  end
+
+  CF["Cloudflare Pages<br/>Global CDN"]
+  SB["Supabase Project<br/>Postgres, Auth, Realtime"]
+
+  D1 -->|HTTPS| CF
+  D2 -->|HTTPS| CF
+  D3 -->|HTTPS| CF
+  CF -->|serves static app| D1
+  CF -->|serves static app| D2
+  CF -->|serves static app| D3
+  D1 -->|HTTPS and WebSocket| SB
+  D2 -->|HTTPS and WebSocket| SB
+  D3 -->|HTTPS and WebSocket| SB

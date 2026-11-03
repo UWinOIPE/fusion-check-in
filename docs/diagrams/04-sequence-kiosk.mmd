@@ -1,0 +1,17 @@
+sequenceDiagram
+  actor Student
+  participant Kiosk as Kiosk Scanner (React app)
+  participant DB as Supabase (Postgres)
+  participant Live as Live Monitor (Realtime)
+
+  Student->>Kiosk: Show QR pass to camera
+  Kiosk->>Kiosk: Decode QR code with jsQR
+  Kiosk->>DB: lookup_pass_by_token(token)
+  DB-->>Kiosk: student_id, pass_status
+  Kiosk->>DB: record_check_in(event_id, session_id, student_id)
+  DB->>DB: Check window, invite list, capacity
+  DB->>DB: Insert check_ins row, compute status
+  DB-->>Kiosk: outcome, checked_in_at, status
+  Kiosk-->>Student: Show result card (Welcome, status)
+  DB--)Live: Realtime INSERT event on check_ins
+  Live-->>Live: Update live count and feed

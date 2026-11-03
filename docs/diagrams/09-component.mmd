@@ -1,0 +1,23 @@
+flowchart TB
+  subgraph Browser["User's Browser"]
+    UI["React App: Pages and Components"]
+    DataLayer["Data Layer: src/data"]
+    Auth["Auth Context"]
+  end
+
+  subgraph SupabaseProject["Supabase Project"]
+    PG[("Postgres Database")]
+    AuthSvc["Supabase Auth"]
+    Realtime["Realtime Service"]
+    RLS["Row Level Security Policies"]
+  end
+
+  CF["Cloudflare Pages: Static Hosting"]
+
+  CF --> Browser
+  UI --> DataLayer
+  UI --> Auth
+  DataLayer --> PG
+  DataLayer --> Realtime
+  Auth --> AuthSvc
+  PG --- RLS

@@ -1,0 +1,77 @@
+erDiagram
+  STUDENTS ||--o| PASSES : "has one"
+  STUDENTS ||--o{ CHECK_INS : "makes"
+  STUDENTS ||--o{ EVENT_INVITEE_PERIODS : "invited by"
+  STUDENTS ||--o| STUDENT_FUSION_IDS : "has one"
+  EVENTS ||--o{ SESSIONS : "has"
+  EVENTS ||--o{ CHECK_INS : "records"
+  EVENTS ||--o{ EVENT_INVITEE_PERIODS : "invites for"
+  EVENTS ||--o{ ENROLLMENTS : "legacy table"
+  SESSIONS ||--o{ CHECK_INS : "scanned at"
+  SESSIONS ||--o{ EVENT_INVITEE_PERIODS : "joined or dropped at"
+  STAFF_USERS ||--o{ CHECK_INS : "recorded by"
+
+  STUDENTS {
+    uuid id PK
+    string student_number
+    string first_name
+    string last_name
+    string email
+    string faculty
+    string program
+    string level
+    string status
+  }
+  PASSES {
+    uuid id PK
+    uuid student_id FK
+    string token
+    string status
+  }
+  EVENTS {
+    uuid id PK
+    string program
+    string registration_type
+    int capacity
+    string status
+  }
+  SESSIONS {
+    uuid id PK
+    uuid event_id FK
+    date date
+    time open_time
+    time close_time
+    time event_start_time
+    int late_grace_minutes
+  }
+  CHECK_INS {
+    uuid id PK
+    uuid session_id FK
+    uuid event_id FK
+    uuid student_id FK
+    uuid checked_in_by FK
+    string method
+    string status
+  }
+  EVENT_INVITEE_PERIODS {
+    uuid id PK
+    uuid event_id FK
+    uuid student_id FK
+    uuid joined_from_session_id FK
+    uuid dropped_from_session_id FK
+    string reason
+  }
+  STAFF_USERS {
+    uuid id PK
+    string email
+    string role
+  }
+  STUDENT_FUSION_IDS {
+    uuid student_id PK
+    string fusion_code
+  }
+  ENROLLMENTS {
+    uuid id PK
+    uuid event_id FK
+    uuid student_id FK
+  }

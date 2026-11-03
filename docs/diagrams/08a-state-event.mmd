@@ -1,0 +1,7 @@
+stateDiagram-v2
+  [*] --> Upcoming
+  Upcoming --> Active : start date and time reached
+  Active --> Completed : end date and time reached
+  Upcoming --> Completed : set manually (Manual status mode)
+  Active --> Upcoming : set manually (Manual status mode)
+  Completed --> [*]

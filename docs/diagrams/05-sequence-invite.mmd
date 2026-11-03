@@ -1,0 +1,17 @@
+sequenceDiagram
+  actor Admin
+  participant App as React app
+  participant DB as Supabase (Postgres)
+
+  Admin->>App: Fill in event form, set Invite-only
+  App->>DB: insert into events
+  DB-->>App: new event row
+  App->>DB: insert into sessions (one or more)
+  DB-->>App: new session rows
+  Admin->>App: Open Manage Invitees, search students
+  App->>DB: select from students
+  DB-->>App: matching students
+  Admin->>App: Add student to roster
+  App->>DB: insert into event_invitee_periods
+  DB-->>App: new invite period row
+  App-->>Admin: Updated invitee roster

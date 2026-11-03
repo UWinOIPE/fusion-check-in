@@ -1,0 +1,21 @@
+flowchart LR
+  Start(["Scan or manual check-in requested"])
+  Start --> Q1{"Event and session found?"}
+  Q1 -- No --> R1["Reject: event or session not found"]
+  Q1 -- Yes --> Q2{"Method is manual?"}
+  Q2 -- No --> Q3{"Is now inside the check-in window?"}
+  Q3 -- Too early --> R2["Reject: session not started"]
+  Q3 -- Too late --> R3["Reject: session closed"]
+  Q3 -- Yes --> Q4
+  Q2 -- Yes --> Q4{"Is the event Invite-only?"}
+  Q4 -- Yes --> Q5{"Is the student invited for this session?"}
+  Q5 -- "No, was dropped" --> R4["Reject: dropped from this session"]
+  Q5 -- "No, never invited" --> R4b["Reject: not invited"]
+  Q5 -- Yes --> Q6
+  Q4 -- No --> Q6{"Is the event Limited and already at capacity?"}
+  Q6 -- Yes --> R5["Reject: at capacity"]
+  Q6 -- No --> C1["Compute status: compare now to event start plus grace period"]
+  C1 --> I1["Attempt to insert the check_ins row"]
+  I1 --> Q7{"Did the insert succeed?"}
+  Q7 -- "No, duplicate scan" --> R6["Report: already checked in, with the original time and status"]
+  Q7 -- Yes --> End(["Return success: checked in, with status"])

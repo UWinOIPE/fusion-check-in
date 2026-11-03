@@ -1,0 +1,75 @@
+classDiagram
+  class Student {
+    +uuid id
+    +string studentNumber
+    +string firstName
+    +string middleName
+    +string lastName
+    +string email
+    +string faculty
+    +string program
+    +string level
+    +string year
+    +string status
+  }
+  class Event {
+    +uuid id
+    +string program
+    +string eventType
+    +date startDate
+    +date endDate
+    +string registrationType
+    +int capacity
+    +string status
+    +string statusMode
+  }
+  class Session {
+    +uuid id
+    +uuid eventId
+    +string label
+    +date date
+    +time openTime
+    +time closeTime
+    +time eventStartTime
+    +time eventEndTime
+    +int lateGraceMinutes
+  }
+  class Pass {
+    +uuid id
+    +uuid studentId
+    +string token
+    +string status
+  }
+  class CheckIn {
+    +uuid id
+    +uuid sessionId
+    +uuid eventId
+    +uuid studentId
+    +datetime checkedInAt
+    +string method
+    +string status
+    +uuid checkedInBy
+  }
+  class InviteePeriod {
+    +uuid id
+    +uuid eventId
+    +uuid studentId
+    +uuid joinedFromSessionId
+    +uuid droppedFromSessionId
+    +string reason
+  }
+  class StaffUser {
+    +uuid id
+    +string email
+    +string fullName
+    +string role
+  }
+
+  Student "1" --> "1" Pass : has
+  Student "1" --> "many" CheckIn : makes
+  Student "1" --> "many" InviteePeriod : invited via
+  Event "1" --> "many" Session : has
+  Event "1" --> "many" InviteePeriod : invites
+  Event "1" --> "many" CheckIn : records
+  Session "1" --> "many" CheckIn : scanned at
+  StaffUser "1" --> "many" CheckIn : records

@@ -1,0 +1,45 @@
+flowchart LR
+  Admin((Admin))
+  Staff((Staff))
+  Kiosk((Kiosk device))
+  Student((Student))
+  Supabase[(Supabase)]
+
+  subgraph System["Fusion Check-In System"]
+    UC1(["Manage students"])
+    UC2(["Import students"])
+    UC3(["Create event"])
+    UC4(["Manage invitees"])
+    UC5(["Scan QR pass"])
+    UC6(["Manual check-in"])
+    UC7(["Undo check-in"])
+    UC8(["View live monitor"])
+    UC9(["View analysis"])
+    UC10(["Export CSV"])
+    UC11(["Reprint pass"])
+  end
+
+  Admin --> UC1
+  Admin --> UC2
+  Admin --> UC3
+  Admin --> UC4
+  Admin --> UC6
+  Admin --> UC7
+  Admin --> UC8
+  Admin --> UC9
+  Admin --> UC10
+  Admin --> UC11
+  Staff --> UC5
+  Staff --> UC6
+  Staff --> UC7
+  Kiosk --> UC5
+  Student --> Kiosk
+  UC1 --> Supabase
+  UC2 --> Supabase
+  UC3 --> Supabase
+  UC4 --> Supabase
+  UC5 --> Supabase
+  UC6 --> Supabase
+  UC7 --> Supabase
+  UC8 --> Supabase
+  UC9 --> Supabase
