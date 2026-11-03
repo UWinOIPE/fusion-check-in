@@ -6,20 +6,19 @@ phone, with live attendance tracking as it happens.
 
 ## Features
 
-- **Student directory** — add students manually, import in bulk from CSV/Excel, search, filter,
+- **Student directory**: add students manually, import in bulk from CSV/Excel, search, filter,
   and manage status (active / alumni / withdrawn).
-- **QR pass generation** — every student gets a printable PDF pass with a unique QR code.
-- **Event management** — create single-day or multi-day events, open or invite-only, with
+- **QR pass generation**: every student gets a printable PDF pass with a unique QR code.
+- **Event management**:create single-day or multi-day events, open or invite-only, with
   per-session check-in windows and capacity limits.
-- **QR scanner** — a kiosk mode (self-serve, propped-up device) and a staff mode (handheld),
+- **QR scanner**:a kiosk mode (self-serve, propped-up device) and a staff mode (handheld),
   sharing one camera-based scanner tuned for fast, reliable reads even on older hardware.
-- **Live monitoring** — real-time check-in feed, arrival status (early / on-time / late), and
+- **Live monitoring**:real-time check-in feed, arrival status (early / on-time / late), and
   who's missing, powered by Supabase Realtime.
-- **Analytics** — attendance by day/session/faculty, no-shows, students who joined an event
+- **Analytics**:attendance by day/session/faculty, no-shows, students who joined an event
   partway through, and exportable CSV reports.
-- **Role-based access** — Admin and Kiosk staff accounts, enforced with Postgres Row Level
+- **Role-based access**:Admin and Kiosk staff accounts, enforced with Postgres Row Level
   Security.
-- **Keyboard accessible** — every page is fully operable without a mouse.
 
 ## Tech stack
 
